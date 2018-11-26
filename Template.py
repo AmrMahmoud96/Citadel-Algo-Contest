@@ -107,8 +107,9 @@ def main():
             bookCA=session.get_book('CAT-A')
             bookETF=session.get_book('ETF')
             session.get_news()
-            arbitrage_bot(session)
-            probability_bot(session,1500000)
+            spread_bot(session)
+            #arbitrage_bot(session)
+            #probability_bot(session,1500000)
             # naive_bot(session)
 
 def probability_bot(session,assignedlimit):
@@ -236,12 +237,14 @@ def forward_looking():
 
 def risk_manager():
     global bookWM,bookWA,bookMM,bookMA,bookCM,bookCA,bookETF
+    ##get current positions, see if theres risk of loss
     return 0
 
 def spread_bot(session):
     global bookWM,bookWA,bookMM,bookMA,bookCM,bookCA,bookETF
 
     ##potentially cancel all orders outstanding here
+    ##potentially remove the tight constraints to counter momentum
 
     #not tight
     if bookWM.bid_price()+0.01 < bookWM.ask_price()-0.01:
@@ -341,12 +344,12 @@ def dynamic_weighting():
 
 def news_adjusted_price(jsonresp):
     global adjusted_price
+
+##potentially put trade here to account for news
     mindex=jsonresp['headline'].index('$')
     if jsonresp['headline'][mindex-1]=='-':
-        print(jsonresp['ticker'],'down',float(jsonresp['headline'][mindex+1:]))
         adjusted_price[jsonresp['ticker']]=adjusted_price.get(jsonresp['ticker'],0)-float(jsonresp['headline'][mindex+1:])
     else:
-        print(jsonresp['ticker'],'up',float(jsonresp['headline'][mindex+1:]))
         adjusted_price[jsonresp['ticker']]=adjusted_price.get(jsonresp['ticker'],0)+float(jsonresp['headline'][mindex+1:])
 
 def money_manager(amount):
