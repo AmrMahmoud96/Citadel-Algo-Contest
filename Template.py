@@ -234,6 +234,108 @@ def momentum_bot():
 def forward_looking():
     return 0
 
+def risk_manager():
+    global bookWM,bookWA,bookMM,bookMA,bookCM,bookCA,bookETF
+    return 0
+
+def spread_bot(session):
+    global bookWM,bookWA,bookMM,bookMA,bookCM,bookCA,bookETF
+
+    ##potentially cancel all orders outstanding here
+
+    #not tight
+    if bookWM.bid_price()+0.01 < bookWM.ask_price()-0.01:
+        session.send_order('WMT-M', 'SELL', bookWM.ask_price()-0.01,  1000)
+        session.send_order('WMT-M', 'BUY', bookWM.bid_price()+0.01, 1000)
+    #tight up
+    if bookWM.bid_price()+0.01 < bookWM.ask_price():
+        session.send_order('WMT-M', 'SELL', bookWM.ask_price(),  1000)
+        session.send_order('WMT-M', 'BUY', bookWM.bid_price()+0.01, 1000)
+    #tight down
+    if bookWM.bid_price() < bookWM.ask_price()-0.01:
+        session.send_order('WMT-M', 'SELL', bookWM.ask_price()-0.01,  1000)
+        session.send_order('WMT-M', 'BUY', bookWM.bid_price(), 1000)
+
+    #not tight
+    if bookWA.bid_price()+0.01 < bookWA.ask_price()-0.01:
+        session.send_order('WMT-A', 'SELL', bookWA.ask_price()-0.01,  1000)
+        session.send_order('WMT-A', 'BUY', bookWA.bid_price()+0.01, 1000)
+    #tight up
+    if bookWA.bid_price()+0.01 < bookWA.ask_price():
+        session.send_order('WMT-A', 'SELL', bookWA.ask_price(),  1000)
+        session.send_order('WMT-A', 'BUY', bookWA.bid_price()+0.01, 1000)
+    #tight down
+    if bookWA.bid_price() < bookWA.ask_price()-0.01:
+        session.send_order('WMT-A', 'SELL', bookWA.ask_price()-0.01,  1000)
+        session.send_order('WMT-A', 'BUY', bookWA.bid_price(), 1000)
+
+    #not tight
+    if bookCM.bid_price()+0.01 < bookCM.ask_price()-0.01:
+        session.send_order('CAT-M', 'SELL', bookCM.ask_price()-0.01,  1000)
+        session.send_order('CAT-M', 'BUY', bookCM.bid_price()+0.01, 1000)
+    #tight up
+    if bookCM.bid_price()+0.01 < bookCM.ask_price():
+        session.send_order('CAT-M', 'SELL', bookCM.ask_price(),  1000)
+        session.send_order('CAT-M', 'BUY', bookCM.bid_price()+0.01, 1000)
+    #tight down
+    if bookCM.bid_price() < bookCM.ask_price()-0.01:
+        session.send_order('CAT-M', 'SELL', bookCM.ask_price()-0.01,  1000)
+        session.send_order('CAT-M', 'BUY', bookCM.bid_price(), 1000)
+
+    #not tight
+    if bookCA.bid_price()+0.01 < bookCA.ask_price()-0.01:
+        session.send_order('CAT-A', 'SELL', bookCA.ask_price()-0.01,  1000)
+        session.send_order('CAT-A', 'BUY', bookCA.bid_price()+0.01, 1000)
+    #tight up
+    if bookCA.bid_price()+0.01 < bookCA.ask_price():
+        session.send_order('CAT-A', 'SELL', bookCA.ask_price(),  1000)
+        session.send_order('CAT-A', 'BUY', bookCA.bid_price()+0.01, 1000)
+    #tight down
+    if bookCA.bid_price() < bookCA.ask_price()-0.01:
+        session.send_order('CAT-A', 'SELL', bookCA.ask_price()-0.01,  1000)
+        session.send_order('CAT-A', 'BUY', bookCA.bid_price(), 1000)
+
+    #not tight
+    if bookMM.bid_price()+0.01 < bookMM.ask_price()-0.01:
+        session.send_order('MMM-M', 'SELL', bookMM.ask_price()-0.01,  1000)
+        session.send_order('MMM-M', 'BUY', bookMM.bid_price()+0.01, 1000)
+    #tight up
+    if bookMM.bid_price()+0.01 < bookMM.ask_price():
+        session.send_order('MMM-M', 'SELL', bookMM.ask_price(),  1000)
+        session.send_order('MMM-M', 'BUY', bookMM.bid_price()+0.01, 1000)
+    #tight down
+    if bookMM.bid_price() < bookMM.ask_price()-0.01:
+        session.send_order('MMM-M', 'SELL', bookMM.ask_price()-0.01,  1000)
+        session.send_order('MMM-M', 'BUY', bookMM.bid_price(), 1000)
+
+    #not tight
+    if bookMA.bid_price()+0.01 < bookMA.ask_price()-0.01:
+        session.send_order('MMM-A', 'SELL', bookMA.ask_price()-0.01,  1000)
+        session.send_order('MMM-A', 'BUY', bookMA.bid_price()+0.01, 1000)
+    #tight up
+    if bookMA.bid_price()+0.01 < bookMA.ask_price():
+        session.send_order('MMM-A', 'SELL', bookMA.ask_price(),  1000)
+        session.send_order('MMM-A', 'BUY', bookMA.bid_price()+0.01, 1000)
+    #tight down
+    if bookMA.bid_price() < bookMA.ask_price()-0.01:
+        session.send_order('MMM-A', 'SELL', bookMA.ask_price()-0.01,  1000)
+        session.send_order('MMM-A', 'BUY', bookMA.bid_price(), 1000)
+
+    #not tight
+    if bookETF.bid_price()+0.01 < bookETF.ask_price()-0.01:
+        session.send_order('ETF', 'SELL', bookETF.ask_price()-0.01,  1000)
+        session.send_order('ETF', 'BUY', bookETF.bid_price()+0.01, 1000)
+    #tight up
+    if bookETF.bid_price()+0.01 < bookETF.ask_price():
+        session.send_order('ETF', 'SELL', bookETF.ask_price(),  1000)
+        session.send_order('ETF', 'BUY', bookETF.bid_price()+0.01, 1000)
+    #tight down
+    if bookETF.bid_price() < bookETF.ask_price()-0.01:
+        session.send_order('ETF', 'SELL', bookETF.ask_price()-0.01,  1000)
+        session.send_order('ETF', 'BUY', bookETF.bid_price(), 1000)
+
+
+
 def dynamic_weighting():
     return 0
 
