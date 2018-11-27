@@ -1,9 +1,9 @@
 import signal
 import requests
 import time
+import numpy as np
 import scipy.stats
 import math
-import threading
 
 shutdown = False
 
@@ -116,13 +116,8 @@ def main():
             bookCA=session.get_book('CAT-A')
             bookETF=session.get_book('ETF')
             session.get_news(session)
-            thread = threading.Thread(target=spread_bot, args=(session))
-            thread2 = threading.Thread(target=probability_bot, args=(session))
-            thread.daemon = True     # Daemonize thread
-            thread2.daemon = True
-            thread.start()
-            thread2.start()
-            #spread_bot(session)
+
+            spread_bot(session)
             #arbitrage_bot(session)
             #probability_bot(session,1500000)
             # # naive_bot(session)
