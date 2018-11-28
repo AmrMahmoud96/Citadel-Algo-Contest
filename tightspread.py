@@ -618,21 +618,6 @@ def spread_bot(session):
     #     session.send_order('MMM-A', 'SELL', bookMA.ask_price()-0.01,  2000)
     #     session.send_order('MMM-A', 'BUY', bookMA.bid_price(), 2000)
 
-    #not tight
-    if bookETF.bid_price()+0.01 < bookETF.ask_price()-0.01:
-        session.send_order('ETF', 'SELL', bookETF.ask_price()-0.01,  2000)
-        session.send_order('ETF', 'BUY', bookETF.bid_price()+0.01, 2000)
-    else:
-        session.send_order('ETF', 'SELL', bookETF.ask_price(),  2000)
-        session.send_order('ETF', 'BUY', bookETF.bid_price(), 2000)
-    # #tight up
-    # if bookETF.bid_price()+0.01 < bookETF.ask_price():
-    #     session.send_order('ETF', 'SELL', bookETF.ask_price(),  500)
-    #     session.send_order('ETF', 'BUY', bookETF.bid_price()+0.01, 500)
-    # #tight down
-    # if bookETF.bid_price() < bookETF.ask_price()-0.01:
-    #     session.send_order('ETF', 'SELL', bookETF.ask_price()-0.01,  500)
-    #     session.send_order('ETF', 'BUY', bookETF.bid_price(), 500)
 
 #
 #

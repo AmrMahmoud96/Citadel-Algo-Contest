@@ -188,73 +188,73 @@ def momentum_bot(session):
             print(ma10[0],ma5[0])
             # print(ma10[0]<ma5[0])
             if ma5[0]>ma10[0]+0.5:
-                session.send_order('WMT-M', 'SELL', bookWM.ask_price(),  5000)
+                session.send_order('WMT-M', 'SELL', bookWM.ask_price(),  10000)
             elif ma5[0]<ma10[0]-0.5:
-                session.send_order('WMT-M', 'BUY', bookWM.ask_price(),  5000)
+                session.send_order('WMT-M', 'BUY', bookWM.ask_price(),  10000)
             elif ma5[0]>ma10[0]:
-                session.send_order('WMT-M', 'BUY', bookWM.bid_price(),  5000)
+                session.send_order('WMT-M', 'BUY', bookWM.bid_price(),  10000)
             elif ma5[0]<ma10[0]:
-                session.send_order('WMT-M', 'SELL', bookWM.ask_price(),  5000)
+                session.send_order('WMT-M', 'SELL', bookWM.ask_price(),  10000)
             ma10=running_mean(y2,10)
             ma5 = running_mean(y2,5)
             print(ma10[0],ma5[0])
             # print(ma10[0]<ma5[0])
             if ma5[0]>ma10[0]+0.5:
-                session.send_order('WMT-A', 'SELL', bookWA.ask_price(),  5000)
+                session.send_order('WMT-A', 'SELL', bookWA.ask_price(),  10000)
             elif ma5[0]<ma10[0]-0.5:
-                session.send_order('WMT-A', 'BUY', bookWA.ask_price(),  5000)
+                session.send_order('WMT-A', 'BUY', bookWA.ask_price(),  10000)
             elif ma5[0]>ma10[0]:
-                session.send_order('WMT-A', 'BUY', bookWA.bid_price(),  5000)
+                session.send_order('WMT-A', 'BUY', bookWA.bid_price(),  10000)
             elif ma5[0]<ma10[0]:
-                session.send_order('WMT-A', 'SELL', bookWA.ask_price(),  5000)
+                session.send_order('WMT-A', 'SELL', bookWA.ask_price(),  10000)
             ma10=running_mean(mm,10)
             ma5 = running_mean(mm,5)
             print(ma10[0],ma5[0])
             # print(ma10[0]<ma5[0])
             if ma5[0]>ma10[0]+0.6:
-                session.send_order('MMM-M', 'SELL', bookMM.ask_price(),  2000)
+                session.send_order('MMM-M', 'SELL', bookMM.ask_price(),  5000)
             elif ma5[0]<ma10[0]-0.6:
-                session.send_order('MMM-M', 'BUY', bookMM.ask_price(),  2000)
+                session.send_order('MMM-M', 'BUY', bookMM.ask_price(),  5000)
             elif ma5[0]>ma10[0]:
-                session.send_order('MMM-M', 'BUY', bookMM.bid_price(),  2000)
+                session.send_order('MMM-M', 'BUY', bookMM.bid_price(),  5000)
             elif ma5[0]<ma10[0]:
-                session.send_order('MMM-M', 'SELL', bookMM.ask_price(),  2000)
+                session.send_order('MMM-M', 'SELL', bookMM.ask_price(),  5000)
             ma10=running_mean(mm2,10)
             ma5 = running_mean(mm2,5)
             print(ma10[0],ma5[0])
             # print(ma10[0]<ma5[0])
             if ma5[0]>ma10[0]+0.6:
-                session.send_order('MMM-A', 'SELL', bookMA.ask_price(),  2000)
+                session.send_order('MMM-A', 'SELL', bookMA.ask_price(),  5000)
             elif ma5[0]<ma10[0]-0.6:
-                session.send_order('MMM-A', 'BUY', bookMA.ask_price(),  2000)
+                session.send_order('MMM-A', 'BUY', bookMA.ask_price(),  5000)
             elif ma5[0]>ma10[0]:
-                session.send_order('MMM-A', 'BUY', bookMA.bid_price(),  2000)
+                session.send_order('MMM-A', 'BUY', bookMA.bid_price(),  5000)
             elif ma5[0]<ma10[0]:
-                session.send_order('MMM-A', 'SELL', bookMA.ask_price(),  2000)
+                session.send_order('MMM-A', 'SELL', bookMA.ask_price(),  5000)
             ma10=running_mean(cm,10)
             ma5 = running_mean(cm,5)
             print(ma10[0],ma5[0])
             # print(ma10[0]<ma5[0])
             if ma5[0]>ma10[0]+0.7:
-                session.send_order('CAT-M', 'SELL', bookCM.ask_price(),  1000)
+                session.send_order('CAT-M', 'SELL', bookCM.ask_price(),  3000)
             elif ma5[0]<ma10[0]-0.7:
-                session.send_order('CAT-M', 'BUY', bookCM.ask_price(),  1000)
+                session.send_order('CAT-M', 'BUY', bookCM.ask_price(),  3000)
             elif ma5[0]>ma10[0]:
-                session.send_order('CAT-M', 'BUY', bookCM.bid_price(),  1000)
+                session.send_order('CAT-M', 'BUY', bookCM.bid_price(),  3000)
             elif ma5[0]<ma10[0]:
-                session.send_order('CAT-M', 'SELL', bookCM.ask_price(),  1000)
+                session.send_order('CAT-M', 'SELL', bookCM.ask_price(),  3000)
             ma10=running_mean(cm2,10)
             ma5 = running_mean(cm2,5)
             print(ma10[0],ma5[0])
             # print(ma10[0]<ma5[0])
             if ma5[0]>ma10[0]+0.7:
-                session.send_order('CAT-A', 'SELL', bookCA.ask_price(),  1000)
+                session.send_order('CAT-A', 'SELL', bookCA.ask_price(),  3000)
             elif ma5[0]<ma10[0]-0.7:
-                session.send_order('CAT-A', 'BUY', bookCA.ask_price(),  1000)
+                session.send_order('CAT-A', 'BUY', bookCA.ask_price(),  3000)
             elif ma5[0]>ma10[0]:
-                session.send_order('CAT-A', 'BUY', bookCA.bid_price(),  1000)
+                session.send_order('CAT-A', 'BUY', bookCA.bid_price(),  3000)
             elif ma5[0]<ma10[0]:
-                session.send_order('CAT-A', 'SELL', bookCA.ask_price(),  1000)
+                session.send_order('CAT-A', 'SELL', bookCA.ask_price(),  3000)
             # ma10=running_mean(ef,10)
             # ma5 = running_mean(ef,5)
             # print(ma10[0],ma5[0])
@@ -604,22 +604,6 @@ def spread_bot(session):
     # if bookMA.bid_price() < bookMA.ask_price()-0.01:
     #     session.send_order('MMM-A', 'SELL', bookMA.ask_price()-0.01,  2000)
     #     session.send_order('MMM-A', 'BUY', bookMA.bid_price(), 2000)
-
-    #not tight
-    if bookETF.bid_price()+0.01 < bookETF.ask_price()-0.01:
-        session.send_order('ETF', 'SELL', bookETF.ask_price()-0.01,  2000)
-        session.send_order('ETF', 'BUY', bookETF.bid_price()+0.01, 2000)
-    else:
-        session.send_order('ETF', 'SELL', bookETF.ask_price(),  2000)
-        session.send_order('ETF', 'BUY', bookETF.bid_price(), 2000)
-    # #tight up
-    # if bookETF.bid_price()+0.01 < bookETF.ask_price():
-    #     session.send_order('ETF', 'SELL', bookETF.ask_price(),  500)
-    #     session.send_order('ETF', 'BUY', bookETF.bid_price()+0.01, 500)
-    # #tight down
-    # if bookETF.bid_price() < bookETF.ask_price()-0.01:
-    #     session.send_order('ETF', 'SELL', bookETF.ask_price()-0.01,  500)
-    #     session.send_order('ETF', 'BUY', bookETF.bid_price(), 500)
 
 #
 #
