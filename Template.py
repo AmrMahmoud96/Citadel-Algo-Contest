@@ -101,8 +101,10 @@ class Session(object):
         resp = self.session.post(self.url + '/v1/orders', params = { 'ticker': sym, 'type': 'LIMIT', 'action': side, 'quantity': size, 'price': price })
         if resp.ok:
             print('sent order', side, sym, size, '@', price)
+            return True
         else:
             print('failed to send order', side, sym, size, '@', price, ':', resp.text)
+            return False
     def kill_all(self,ticker):
         resp = self.session.post(self.url + '/v1/commands/cancel', params = {'ticker':ticker,'query':'volume>0'})
         if resp.ok:
@@ -123,7 +125,7 @@ def main():
             bookMA=session.get_book('MMM-A')
             bookCM=session.get_book('CAT-M')
             bookCA=session.get_book('CAT-A')
-            bookETF=session.get_book('ETF')
+            # bookETF=session.get_book('ETF')
 
             process = threading.Thread(target=spread_bot, args=[session])
             process.start()
@@ -649,10 +651,16 @@ def news_adjusted_price(jsonresp,session):
         # session.send_order(jsonresp['ticker']+'-M', 'SELL', bookM.ask_price()-0.01 + val,  (abs(val))/(0.01*bookM.bid_price())*100000)
         # session.send_order(jsonresp['ticker']+'-A', 'BUY', bookA.bid_price()+0.01 + val,  (abs(val))/(0.01*bookM.bid_price())*100000)
         # session.send_order(jsonresp['ticker']+'-A', 'SELL', bookA.ask_price()-0.01 + val,  (abs(val))/(0.01*bookM.bid_price())*100000)
-        session.send_order(jsonresp['ticker']+'-M', 'BUY', bookM.bid_price()+0.01 + round(val*0.8,2), 100000)
-        session.send_order(jsonresp['ticker']+'-M', 'SELL', bookM.ask_price()-0.01 + round(val*0.8,2), 100000)
-        session.send_order(jsonresp['ticker']+'-A', 'BUY', bookA.bid_price()+0.01 + round(val*0.8,2), 100000)
-        session.send_order(jsonresp['ticker']+'-A', 'SELL', bookA.ask_price()-0.01 +round(val*0.8,2), 100000)
+        if session.send_order(jsonresp['ticker']+'-M', 'BUY', bookM.bid_price()+0.01 + round(val*0.8,2), 100000):
+            session.send_order(jsonresp['ticker']+'-M', 'SELL', bookM.ask_price()-0.01 + round(val*0.8,2), 100000)
+            session.send_order(jsonresp['ticker']+'-A', 'BUY', bookA.bid_price()+0.01 + round(val*0.8,2), 100000)
+            session.send_order(jsonresp['ticker']+'-A', 'SELL', bookA.ask_price()-0.01 +round(val*0.8,2), 100000)
+        else:
+            session.send_order(jsonresp['ticker']+'-M', 'SELL', bookM.ask_price()-0.01 + round(val*0.8,2), 100000)
+            session.send_order(jsonresp['ticker']+'-M', 'BUY', bookM.bid_price()+0.01 + round(val*0.8,2), 100000)
+            session.send_order(jsonresp['ticker']+'-A', 'SELL', bookA.ask_price()-0.01 +round(val*0.8,2), 100000)
+            session.send_order(jsonresp['ticker']+'-A', 'BUY', bookA.bid_price()+0.01 + round(val*0.8,2), 100000)
+
 # def money_manager(amount):
 #     return 0
 # # def risk_manager():
