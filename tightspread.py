@@ -667,10 +667,6 @@ def news_adjusted_price(jsonresp,session):
         session.send_order(jsonresp['ticker']+'-M', 'SELL', bookM.ask_price()-0.01 + round(val*0.8,2), 100000)
         session.send_order(jsonresp['ticker']+'-A', 'BUY', bookA.bid_price()+0.01 + round(val*0.8,2), 100000)
         session.send_order(jsonresp['ticker']+'-A', 'SELL', bookA.ask_price()-0.01 +round(val*0.8,2), 100000)
-        session.send_order(jsonresp['ticker']+'-M', 'BUY', bookM.bid_price()+0.01 + round(val*0.8,2), 100000)
-        session.send_order(jsonresp['ticker']+'-M', 'SELL', bookM.ask_price()-0.01 + round(val*0.8,2), 100000)
-        session.send_order(jsonresp['ticker']+'-A', 'BUY', bookA.bid_price()+0.01 + round(val*0.8,2), 100000)
-        session.send_order(jsonresp['ticker']+'-A', 'SELL', bookA.ask_price()-0.01 +round(val*0.8,2), 100000)
 # def money_manager(amount):
 #     return 0
 # # def risk_manager():
